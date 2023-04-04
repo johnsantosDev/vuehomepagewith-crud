@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>CRUD application VueJs</title>
+
+
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap-theme.min.css'>
+  <link rel="stylesheet" href="src/css/style.css">
+
+   <!-- Google Fonts -->
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+   <!-- Vendor CSS Files -->
+   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+   <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+  <header class="page-header">
+    
+    
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top  header-transparent ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="#">Logo</a></h1>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="">Home</a></li>
+          <li><a class="nav-link scrollto" href="#">About</a></li>
+          <li><a class="nav-link scrollto" href="#">Services</a></li>
+          <li><a class="nav-link scrollto" href="#">Products</a></li>
+          
+          <li><a class="getstarted scrollto btn-dark rounded-1 rounded-1" href="#">Call to Action</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header> 
+
+<main>
+  
+  
+  <section class="d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 hero-head">
+            <h1><strong>
+              ipsum dolor sit amet consectetur adipisicing elit.odio adipisci placeat nulla iusto.
+            </strong> </h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, enim vel aliquet hendrerit, nisi metus euismod massa, vel dictum nisi ex in mi. Mauris quis tristique leo. Donec et felis est.</p>
+            <button class="btn btn-dark rounded-1" href="#">Call to Action</button>
+            <button class="btn btn-outline-dark rounded-1" href="#">Call to Action</button>
+          </div>
+          <div class="col-md-6 hero-head">
+             
+            <div class="container">
+              <div class="row">
+                 
+                <div class="col-md-8" style="position: relative;">
+                  <div class="card bg-light" style="height: 400px">
+                    <div class="card-body" style="background-color: #d9d9d9;">
+                    </div>
+                  </div>
+                  <div class="card bg-light" style="height: 200px; width: 200px; position: absolute; top: -50px; right: -50px; z-index: 1;">
+                    <div class="card-body" style="background-color: #c4c4c4;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          
+          </div> 
+
+      </div>
+    </div>
+
+  </section>
+
+  </header>
+  <div id="app"></div>
+  
+</div>
+
+<template id="product-list">
+  <section>
+  <div class="actions">
+    <router-link class="btn btn-outline-dark" :to="{path: '/add-product'}">
+       
+      Add product
+    </router-link>
+  </div>
+  <div class="filters row">
+    <div class="form-group col-sm-3">
+      <label for="search-element">Product name</label>
+      <input v-model="searchKey" class="form-control" id="search-element" requred/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-7">
+      <table class="table table-bordered ">
+        <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th class="col-sm-3">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="stylished-gray">
+        <tr v-for="product in filteredProducts">
+          <td>
+            <router-link :to="{name: 'product', params: {product_id: product.id}}">{{ product.name }}</router-link>
+          </td>
+          <td>
+            {{ product.price }}
+            <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+          </td>
+          <td class="col-sm-2">
+            <div class="row align-items-start">
+              <div class="col">
+            <router-link class="btn btn-dark" :to="{name: 'product-edit', params: {product_id: product.id}}">Edit</router-link>
+            <router-link class="btn btn-outline-secondary" :to="{name: 'product-delete', params: {product_id: product.id}}">Delete</router-link>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-5">
+      <div class="card tbg-light mb-5">
+        <div class="card-header text-center ">
+          <h2 class=".text-secondary">
+            Header Text
+          </h2>
+          <p class="stylished-gray">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elic. Itaque explicabo maiores repellat repellendu
+          </p>
+          <div class="card tbg-light mb-5">
+
+            <input class="form-control" id="sample input" requred/>
+          </div>
+          <div class="card tbg-light mb-5">
+
+            <input class="form-control" id="sample input" requred/>
+          </div>
+    
+          <button type="submit" class="btn btn-dark">Sample call to action</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  </section>
+</template>
+
+<template id="add-product">
+    <section>
+      <div class="col-sm-5">
+      <div class="card tbg-light mb-5">
+        <div class="card-header text-center ">
+      <h2 class=".text-secondary">
+        Create product
+      </h2>
+      <p class="stylished-gray">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elic. Itaque explicabo maiores repellat repellendu
+      </p>
+  <form v-on:submit="createProduct">
+    <div class="form-group"> 
+      <input class="form-control" placeholder="Name" id="add-name" v-model="product.name" required/>
+    </div>
+    
+    <div class="form-group"> 
+      <input type="number" class="form-control" placeholder="Price" id="add-price" v-model="product.price"/>
+    </div>
+    <button type="submit" class="btn btn-dark">Create product</button>
+    <router-link to="/" class="btn btn-outline-secondary">Cancel</router-link>
+  </form>
+        </div>
+      </div>
+      </div>
+</section>
+</template>
+
+<template id="product">
+    <section>
+      <div class="col-sm-5">
+        <div class="card tbg-light mb-5">
+          <div class="card-header text-center ">
+        <h2 class=".text-secondary">
+          <h2>{{ product.name }}</h2>
+        </h2>
+        <p class="stylished-gray">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elic. Itaque explicabo maiores repellat repellendu
+        </p>
+ 
+  <b>Price:</b>
+  <div>{{ product.price }}<span class="glyphicon glyphicon-euro"></span></div>
+  <br/>
+  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+  <router-link class="btn btn-outline-secondary" to="/">Back to product list</router-link>
+
+</div>
+</div>
+</div>
+</section>
+</template>
+
+<template id="product-edit">
+    <section>
+      <div class="col-sm-5">
+        <div class="card tbg-light mb-5">
+          <div class="card-header text-center ">
+        <h2 class=".text-secondary">
+          Edit product
+        </h2>
+        <p class="stylished-gray">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elic. Itaque explicabo maiores repellat repellendu
+        </p>
+  <form v-on:submit="updateProduct">
+    <div class="form-group">
+      <input class="form-control" id="edit-name" v-model="product.name" required/>
+    </div>
+    <div class="form-group"> 
+      <input type="number" class="form-control" id="edit-price" v-model="product.price"/>
+    </div>
+    <button type="submit" class="btn btn-dark">Save changes</button>
+    <router-link to="/" class="btn btn-outline-secondary">Cancel</router-link>
+  </form>
+
+</div>
+</div>
+</div>
+</section>
+</template>
+
+<template id="product-delete">
+    <section>
+   
+  <div class="col-sm-5">
+    <div class="card tbg-light mb-5">
+      <div class="card-header text-center ">
+    <h2 class=".text-secondary">
+      Delete product {{ product.name }}
+    </h2>
+    <p class="stylished-gray">
+      The action cannot be undone. Lorem ipsum, dolor sit amet consectetur adipisicing elic. Itaque explicabo maiores repellat repellendu
+    </p>
+  <form v-on:submit="deleteProduct">
+    <button type="submit" class="btn btn-dark">Delete product</button>
+    <router-link to="/" class="btn btn-outline-secondary">Cancel</router-link>
+  </form>
+</div>
+</div>
+</div>
+</section>
+</template>
+
+<template id="homepage" class="homepage">
+  <section> 
+  </section>
+</template>
+
+
+
+ 
+<section id="details" class="details">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3><strong>
+          ipsum dolor sit amet consectetur adipisicing
+        </strong> </h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, enim vel aliquet hendrerit, nisi metus euismo.</p>
+   
+      </div>
+
+    <div class="col-lg-4 col-md-6">
+      <div class="card bg-light" style="height: 300px;top: -150px;">
+        <div class="card-body" style="background-color: #d9d9d9;">
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="col-md-4">
+      <h3><strong>
+        ipsum dolor sit amet consectetur adipisicing elit
+      </strong> </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, enim vel aliquet hendrerit, nisi metus euismod.</p>
+       
+    </div>
+
+  </div>
+  </div>
+</section>
+
+
+
+
+<footer id="footer" >
+
+  <div class="footer-top" style="background-color:#ececec;">
+    <div class="container">
+      <div class="row">
+
+         
+
+        <div class="col-lg-5 col-md-6">
+          <div class="card bg-light" style="height: 300px;top: -150px;">
+            <div class="card-body" style="background-color: #d9d9d9;">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 ">
+
+        </div>
+        <div class="col-md-5">
+          <h1><strong>
+            ipsum dolor sit amet consectetur adipisicing elit.odio adipisci placeat nulla iusto.
+          </strong> </h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, enim vel aliquet hendrerit, nisi metus euismod massa, vel dictum nisi ex in mi. Mauris quis tristique leo. Donec et felis est.</p>
+          <button class="btn btn-dark rounded-1" href="#">Call to Action</button> 
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+   
+</footer><!-- End Footer -->
+</main>
+<script src='node_modules/vue/dist/vue.js'></script>
+<script src='node_modules/vue-router/dist/vue-router.js'></script>
+<script src="src/js/index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+.logo {
+  width: 50px;
+  float: left;
+  margin-right: 15px;
+}
+
+.form-group {
+  max-width: 500px;
+}
+
+.actions {
+  padding: 10px 0;
+}
+
+.glyphicon-euro {
+  font-size: 12px;
+}
+
+.stylished-gray
+{
+  color:#b7b3b3;
+}
+
+.hero-head
+{
+  margin-top:200px;
+}
